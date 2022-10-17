@@ -1,4 +1,4 @@
-const { NotImplementedError } = require('../extensions/index.js');
+const { NotImplementedError, checkForThrowingErrors } = require('../extensions/index.js');
 
 /**
  * Create transformed array based on the control sequences that original
@@ -13,11 +13,35 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
-}
+// function transform(arr) {
 
+// 	if (!(arr instanceof Array)) throw new Error("'arr' parameter must be an instance of the Array!");
+// 	return arr.reduce((acc, curVal, index, arr) => {
+// 		if (curVal == '--double-next') {
+// 			curVal = arr[index + 1]
+// 		}
+// 		if (curVal == '--double-prev') {
+// 			curVal = arr[index - 1]
+// 		}
+// 		return acc.concat(curVal)
+// 	}, [])
+// }
+function transform(arr) {
+	if (!(arr instanceof Array)) throw new Error("'arr' parameter must be an instance of the Array!");
+	let newArr = arr.reduce((acc, curVal, index, arr) => {
+		if (curVal === '--double-next') curVal = arr[index + 1]
+		if (curVal === '--double-prev') curVal = arr[index - 1]
+		return acc.concat(curVal)
+	}, [])
+	console.log(newArr)
+
+	return newArr
+}
 module.exports = {
-  transform
+	transform
 };
+
+
+
+
+
